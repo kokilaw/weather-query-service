@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleNotFoundException(NotFoundException ex) {
         log.error("Error occurred - ", ex);
         ProblemDetail problemDetail = getProblemDetail(HttpStatus.NOT_FOUND, ex.getMessage());
-        Optional.ofNullable(ex.getResourceIdMap()).orElseGet(Collections::emptyMap)
+        Optional.ofNullable(ex.getParameterMap()).orElseGet(Collections::emptyMap)
                 .forEach(problemDetail::setProperty);
         return problemDetail;
     }
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleInvalidParameterException(InvalidParameterException ex) {
         log.error("Error occurred - ", ex);
         ProblemDetail problemDetail = getProblemDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
-        Optional.ofNullable(ex.getResourceIdMap()).orElseGet(Collections::emptyMap)
+        Optional.ofNullable(ex.getParameterMap()).orElseGet(Collections::emptyMap)
                 .forEach(problemDetail::setProperty);
         return problemDetail;
     }
