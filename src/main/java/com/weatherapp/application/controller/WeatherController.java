@@ -16,6 +16,6 @@ public class WeatherController {
     @GetMapping
     public Map<String, String> getWeatherUpdate(@RequestParam String city, @RequestParam String countryCode) {
         return Collections.emptyMap();
-    };
+    }
 
 }
