@@ -26,6 +26,7 @@ curl --location 'localhost:8080/v1/weather?city=melbourne&countryCode=au' \
 
 ## Design Decisions
 
+![Alt text](https://github.com/kokilaw/weather-query-service/blob/task/db-setup-and-init-scheme/misc/db-diagram.png)
 
 
 
