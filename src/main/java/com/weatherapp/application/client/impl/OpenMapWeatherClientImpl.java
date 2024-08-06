@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -67,7 +68,10 @@ public class OpenMapWeatherClientImpl implements OpenMapWeatherClient {
         return Stream.of(Objects.requireNonNull(response.getBody()))
                 .findAny()
                 .map(geoCodeResultItem -> new GeoCodeResultDTO(geoCodeResultItem.lat(), geoCodeResultItem.lon()))
-                .orElseThrow(() -> new NotFoundException("Provided location not available"));
+                .orElseThrow(() -> new NotFoundException(
+                        "Provided location not available",
+                        Map.of("city", city, "countryCode", countryCode)
+                ));
     }
 
     record GeoCodeResultItem(String name, String lat, String lon) {}
