@@ -4,6 +4,7 @@ import com.weatherapp.application.api.dto.WeatherResultDTO;
 import com.weatherapp.application.api.response.WeatherResultResponse;
 import com.weatherapp.application.aspect.annotation.RateControlled;
 import com.weatherapp.application.service.WeatherService;
+import com.weatherapp.application.util.ValidationUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,8 @@ public class WeatherController {
     @RateControlled
     @GetMapping
     public WeatherResultResponse getWeatherUpdate(@RequestParam String city, @RequestParam String countryCode) {
+        ValidationUtil.validateCity(city);
+        ValidationUtil.validateCountryCode(countryCode);
         WeatherResultDTO weatherUpdate = weatherService.getWeatherUpdate(city, countryCode);
         return new WeatherResultResponse(weatherUpdate.description());
     }
