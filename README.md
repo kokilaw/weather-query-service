@@ -26,6 +26,17 @@ curl --location 'localhost:8080/v1/weather?city=melbourne&countryCode=au' \
 
 ## Design Decisions
 
+![Alt text](https://github.com/kokilaw/weather-query-service/blob/task/db-setup-and-init-scheme/misc/db-diagram.png)
+
+ - `api_key` table will be maintaining the current API keys and `status` column with track whether they are active.
+ - `access_log` table will track the usage of API keys.
+ - `weather_update` table will store the weather updates received from OpenWeatherMap API. A unique key combining the columns `city, country_code and period_code` is used to determine whether and weather update is available locally for a given hour a certain date. If available, update will be sourced from DB otherwise OpenWeatherMap API will be used.
+ - Spring AOP has been used to validate and track the API Key usage. API Key protected endpoints will be annotated with `@RateControlled`
+
+## Future Enhancements
+
+- Move the database credentials and external API keys from `application.yaml` to AWS SecretManager and load the from the environment variables.
+- Implement caching to reduce the database reads.
 
 
 
