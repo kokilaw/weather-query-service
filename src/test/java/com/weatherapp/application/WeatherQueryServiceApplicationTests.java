@@ -1,4 +1,4 @@
-package com.weatherapp.weather_query_service;
+package com.weatherapp.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

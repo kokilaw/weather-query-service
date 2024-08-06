@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: weather-query-service
+  datasource:
+    url: jdbc:h2:mem:weather_db
+    driverClassName: org.h2.Driver
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:password}
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+open-weather-map-api:
+  base-url: https://api.openweathermap.org/data/2.5
+  api-key: ${OPEN_WEATHER_API_KEY:API_KEY}
