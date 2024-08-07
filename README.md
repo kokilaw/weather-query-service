@@ -16,7 +16,7 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 ./mvnw spring-boot:run
 ```
 ## Testing
- - Loading your OpenWeatherMap API key as an environment variable into `OPEN_WEATHER_API_KEY` variable.
+ - Load your OpenWeatherMap API key as an environment variable into `OPEN_WEATHER_API_KEY` variable.
  - You can use following curl to fetch the weather update replacing `{REPLACE_WITH_API_KEY}` placeholder with the API Key. You can use one the following API keys which are loaded during the startup.
 
 ```shell
