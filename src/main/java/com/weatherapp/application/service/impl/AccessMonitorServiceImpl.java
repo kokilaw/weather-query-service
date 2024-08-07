@@ -1,5 +1,6 @@
 package com.weatherapp.application.service.impl;
 
+import com.weatherapp.application.Constants;
 import com.weatherapp.application.config.ApiKeyConfig;
 import com.weatherapp.application.exception.ApiKeyNotFoundException;
 import com.weatherapp.application.exception.ApiKeyRateExceededException;
@@ -33,20 +34,20 @@ public class AccessMonitorServiceImpl implements AccessMonitorService {
     public void validateKey(String apiKey) {
         ApiKeyEntity apiKeyEntity = getApiKeyEntity(apiKey);
         if (ApiKeyEntity.KeyStatus.EXPIRED == apiKeyEntity.getStatus()) {
-            throw new ExpiredApiKeyException("Provided API Key Expired");
+            throw new ExpiredApiKeyException(Constants.ExceptionMessages.EXPIRED_API_KEY);
         }
         int logCountWithinConsideredPeriod = accessLogRepository.getCountByApiKeyAndAccessedAt(
                 apiKey,
                 LocalDateTime.now().minusMinutes(apiKeyConfig.getTimePeriodInMinutes())
         );
         if (logCountWithinConsideredPeriod >= apiKeyConfig.getRequestRateAllowedForPeriod()) {
-            throw new ApiKeyRateExceededException("API Key usage limit reached for the period");
+            throw new ApiKeyRateExceededException(Constants.ExceptionMessages.RATE_EXCEEDED_API_KEY);
         }
     }
 
     private ApiKeyEntity getApiKeyEntity(String apiKey) {
         return apiKeyRepository.findById(apiKey)
-                .orElseThrow(() -> new ApiKeyNotFoundException("Invalid API Key Provided"));
+                .orElseThrow(() -> new ApiKeyNotFoundException(Constants.ExceptionMessages.INVALID_API_KEY));
     }
 
     @Override

@@ -69,7 +69,7 @@ public class OpenMapWeatherClientImpl implements OpenMapWeatherClient {
                 .findAny()
                 .map(geoCodeResultItem -> new GeoCodeResultDTO(geoCodeResultItem.lat(), geoCodeResultItem.lon()))
                 .orElseThrow(() -> new NotFoundException(
-                        "Provided location not available",
+                        Constants.ExceptionMessages.LOCATION_NOT_AVAILABLE,
                         Map.of("city", city, "countryCode", countryCode)
                 ));
     }

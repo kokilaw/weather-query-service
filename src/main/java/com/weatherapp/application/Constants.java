@@ -18,5 +18,13 @@ public class Constants {
     public static class HttpStatusCode {
         public static final int NOT_FOUND = 404;
     }
+    public static class ExceptionMessages {
+        public static final String INVALID_API_KEY = "Invalid API Key Provided.";
+        public static final String RATE_EXCEEDED_API_KEY = "API Key usage limit reached for the period.";
+        public static final String EXPIRED_API_KEY = "Provided API Key Expired.";
+        public static final String INVALID_COUNTRY_CODE = "Invalid country code provided. ISO_3166-2 country code expected";
+        public static final String INVALID_CITY = "City can't empty.";
+        public static final String LOCATION_NOT_AVAILABLE = "Provided location not available.";
+    }
 
 }
