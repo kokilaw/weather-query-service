@@ -25,6 +25,9 @@ public class Constants {
         public static final String INVALID_COUNTRY_CODE = "Invalid country code provided. ISO_3166-2 country code expected";
         public static final String INVALID_CITY = "City can't empty.";
         public static final String LOCATION_NOT_AVAILABLE = "Provided location not available.";
+        public static final String WEATHER_DATA_NOT_AVAILABLE = "Weather data not found for given location";
+        public static final String ERROR_COMMUNICATING_WITH_OPEN_WEATHER_MAP = "Error occurred communication with OpenWeatherMap APIs";
+        public static final String ERROR_WITH_OPEN_WEATHER_MAP = "Error at OpenWeatherMap API end";
     }
 
 }

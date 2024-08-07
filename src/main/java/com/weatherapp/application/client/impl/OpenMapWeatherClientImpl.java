@@ -47,7 +47,7 @@ public class OpenMapWeatherClientImpl implements OpenMapWeatherClient {
                 restTemplate.getForEntity(requestUrl, WeatherResultResponse.class);
         List<WeatherResponse> results = Objects.requireNonNull(response.getBody()).weather();
         return results.stream().findFirst().map(weatherResponse -> new WeatherResultDTO(weatherResponse.description()))
-                .orElseThrow(() -> new InternalServerError("Results not available for given location"));
+                .orElseThrow(() -> new InternalServerError(Constants.ExceptionMessages.WEATHER_DATA_NOT_AVAILABLE));
 
     }
 

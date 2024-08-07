@@ -27,12 +27,12 @@ public class OpenMapWeatherErrorHandler implements ResponseErrorHandler {
                 .lines().collect(Collectors.joining("\n"));
         log.error("Error occurred - [{}][{}]", response.getStatusCode(), responseBody);
         if (response.getStatusCode().is5xxServerError()) {
-            throw new InternalServerError("Error at OpenWeatherMap API end");
+            throw new InternalServerError(Constants.ExceptionMessages.ERROR_WITH_OPEN_WEATHER_MAP);
         } else if (response.getStatusCode().is4xxClientError()) {
             if (Constants.HttpStatusCode.NOT_FOUND == response.getStatusCode().value()) {
-                throw new NotFoundException("Weather data not found for given location");
+                throw new NotFoundException(Constants.ExceptionMessages.WEATHER_DATA_NOT_AVAILABLE);
             } else {
-                throw new InternalServerError("Error occurred communication with OpenWeatherMap APIs");
+                throw new InternalServerError(Constants.ExceptionMessages.ERROR_COMMUNICATING_WITH_OPEN_WEATHER_MAP);
             }
         }
     }

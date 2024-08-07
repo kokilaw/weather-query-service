@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,8 +25,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import static com.weatherapp.application.Constants.ExceptionMessages.INVALID_COUNTRY_CODE;
-import static com.weatherapp.application.Constants.ExceptionMessages.LOCATION_NOT_AVAILABLE;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.weatherapp.application.Constants.ExceptionMessages.WEATHER_DATA_NOT_AVAILABLE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_CLASS;
@@ -163,7 +161,7 @@ class WeatherControllerTest {
         WeatherResultDTO mockedClientResponse = new WeatherResultDTO("slightly sunny");
         Mockito.when(openMapWeatherClient.getWeatherUpdate(any(), any()))
                 .thenThrow(new NotFoundException(
-                        LOCATION_NOT_AVAILABLE,
+                        WEATHER_DATA_NOT_AVAILABLE,
                         Map.of("city", inputCity, "countryCode", inputCountryCode)
                 ));
         mockMvc.perform(get("/v1/weather")
@@ -172,7 +170,7 @@ class WeatherControllerTest {
                         .header(Constants.Headers.API_KEY, inputAPIKey)
                         .contentType("application/json"))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.detail").value(LOCATION_NOT_AVAILABLE))
+                .andExpect(jsonPath("$.detail").value(WEATHER_DATA_NOT_AVAILABLE))
                 .andExpect(jsonPath("$.countryCode").value(inputCountryCode))
                 .andExpect(jsonPath("$.city").value(inputCity));
     }
