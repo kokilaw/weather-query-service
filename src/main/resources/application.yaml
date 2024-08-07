@@ -16,7 +16,7 @@ spring:
 
 open-weather-map-api:
   base-url: https://api.openweathermap.org
-  api-key: ${OPEN_WEATHER_API_KEY:d21af51e285cb140f77d3c84a3bace55}
+  api-key: ${OPEN_WEATHER_API_KEY:OPEN_WEATHER_API_KEY_PLACEHOLDER}
 
 api-key:
   time_period_in_minutes: 60
